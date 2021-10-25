@@ -47,8 +47,7 @@ final class SuperPayDashboardViewController: UIViewController, SuperPayDashboard
   private let cardView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.layer.cornerRadius = 6
-    view.layer.cornerCurve = .continuous
+    view.roundCorners()
     view.backgroundColor = .systemIndigo
     return view
   }()
