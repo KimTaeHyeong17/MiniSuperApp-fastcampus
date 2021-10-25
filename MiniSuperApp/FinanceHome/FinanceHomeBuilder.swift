@@ -5,8 +5,9 @@ protocol FinanceHomeDependency: Dependency {
   // created by this RIB.
 }
 
-final class FinanceHomeComponent: Component<FinanceHomeDependency> {
-  
+final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency {
+  ///리블렛이 필요한 객체를 담는 바구니
+  ///자식리블렛이 필요한 객체도 담고 있어서 자식들의 dependency를 conform 해야함
   // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
@@ -23,10 +24,15 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
   }
   
   func build(withListener listener: FinanceHomeListener) -> FinanceHomeRouting {
-    let _ = FinanceHomeComponent(dependency: dependency)
+    let component = FinanceHomeComponent(dependency: dependency)
     let viewController = FinanceHomeViewController()
     let interactor = FinanceHomeInteractor(presenter: viewController)
     interactor.listener = listener
-    return FinanceHomeRouter(interactor: interactor, viewController: viewController)
+    let superPayDashboardBuilder = SuperPayDashboardBuilder(dependency: component)
+    
+    return FinanceHomeRouter(
+      interactor: interactor,
+      viewController: viewController,
+      superPayDashboardBuildable: superPayDashboardBuilder)
   }
 }
