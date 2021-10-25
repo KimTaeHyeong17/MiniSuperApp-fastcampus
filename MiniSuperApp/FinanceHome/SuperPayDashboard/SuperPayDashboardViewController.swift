@@ -44,6 +44,43 @@ final class SuperPayDashboardViewController: UIViewController, SuperPayDashboard
     return button
   }()
   
+  private let cardView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.layer.cornerRadius = 6
+    view.layer.cornerCurve = .continuous
+    view.backgroundColor = .systemIndigo
+    return view
+  }()
+  
+  private let currencyLabel: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.font = .systemFont(ofSize: 32, weight: .semibold)
+    label.text = "원"
+    label.textColor = .white
+    return label
+  }()
+  
+  private let balanceAmountLabel: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.font = .systemFont(ofSize: 22, weight: .semibold)
+    label.textColor = .white
+    label.text = "10,000"
+    return label
+  }()
+  
+  private let balanceStackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.alignment = .fill
+    stackView.distribution = .equalSpacing
+    stackView.axis = .horizontal
+    stackView.spacing = 4
+    return stackView
+  }()
+  
   init() {
     super.init(nibName: nil, bundle: nil)
     setupViews()
@@ -57,6 +94,10 @@ final class SuperPayDashboardViewController: UIViewController, SuperPayDashboard
   private func setupViews() {
     view.backgroundColor = .white
     view.addSubview(headerStackView)
+    view.addSubview(cardView)
+    cardView.addSubview(balanceStackView)
+    balanceStackView.addArrangedSubview(balanceAmountLabel)
+    balanceStackView.addArrangedSubview(currencyLabel)
     
     headerStackView.addArrangedSubview(titleLabel)
     headerStackView.addArrangedSubview(topupButton)
@@ -64,7 +105,17 @@ final class SuperPayDashboardViewController: UIViewController, SuperPayDashboard
     NSLayoutConstraint.activate([
       headerStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
       headerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20),
-      headerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+      headerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+      
+      cardView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 10),
+      cardView.heightAnchor.constraint(equalToConstant: 180),
+      cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+      cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+      cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+      
+      balanceStackView.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
+      balanceStackView.centerYAnchor.constraint(equalTo: cardView.centerYAnchor)
+      
     ])
   }
   
