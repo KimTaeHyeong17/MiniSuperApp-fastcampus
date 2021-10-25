@@ -32,6 +32,5 @@ final class FinanceHomeInteractor: PresentableInteractor<FinanceHomePresentable>
   
   override func willResignActive() {
     super.willResignActive()
-    // TODO: Pause any business logic.
   }
 }

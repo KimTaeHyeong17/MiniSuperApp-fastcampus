@@ -25,7 +25,7 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
   }
   
   func attachSuperPayDashboard() {
-    guard superPayRouting != nil else { return }
+    if superPayRouting != nil { return }
 
     let router = superPayDashboardBuildable.build(withListener: interactor)
     let dashboard = router.viewControllable

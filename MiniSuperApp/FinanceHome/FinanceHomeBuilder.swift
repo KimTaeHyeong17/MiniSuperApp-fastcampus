@@ -8,7 +8,6 @@ protocol FinanceHomeDependency: Dependency {
 final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency {
   ///리블렛이 필요한 객체를 담는 바구니
   ///자식리블렛이 필요한 객체도 담고 있어서 자식들의 dependency를 conform 해야함
-  // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
@@ -28,6 +27,7 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
     let viewController = FinanceHomeViewController()
     let interactor = FinanceHomeInteractor(presenter: viewController)
     interactor.listener = listener
+    
     let superPayDashboardBuilder = SuperPayDashboardBuilder(dependency: component)
     
     return FinanceHomeRouter(
