@@ -8,6 +8,18 @@ protocol FinanceHomeDependency: Dependency {
 final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency {
   ///리블렛이 필요한 객체를 담는 바구니
   ///자식리블렛이 필요한 객체도 담고 있어서 자식들의 dependency를 conform 해야함
+  
+  var balance: ReadOnlyCurrentValuePublisher<Double> { balancePublisher }
+  private let balancePublisher: CurrentValuePublisher<Double>
+
+  init(
+    dependency: FinanceHomeDependency,
+    balance: CurrentValuePublisher<Double>
+  ) {
+    self.balancePublisher = balance
+    super.init(dependency: dependency)
+  }
+
 }
 
 // MARK: - Builder
@@ -23,7 +35,11 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
   }
   
   func build(withListener listener: FinanceHomeListener) -> FinanceHomeRouting {
-    let component = FinanceHomeComponent(dependency: dependency)
+    let balancePublisher = CurrentValuePublisher<Double>(0)
+    let component = FinanceHomeComponent(
+      dependency: dependency,
+      balance: balancePublisher
+    )
     let viewController = FinanceHomeViewController()
     let interactor = FinanceHomeInteractor(presenter: viewController)
     interactor.listener = listener
