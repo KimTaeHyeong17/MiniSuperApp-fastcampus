@@ -9,7 +9,6 @@ import ModernRIBs
 import Combine
 
 protocol CardOnFileDashboardRouting: ViewableRouting {
-  // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
 protocol CardOnFileDashboardPresentable: Presentable {
@@ -19,7 +18,7 @@ protocol CardOnFileDashboardPresentable: Presentable {
 }
 
 protocol CardOnFileDashboardListener: AnyObject {
-  // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+  func cardOnFileDashboardDidTapAddPaymentMethod()
 }
 
 protocol CardOnFileDashboardInteractorDependency {
@@ -57,5 +56,9 @@ final class CardOnFileDashboardInteractor: PresentableInteractor<CardOnFileDashb
     
     cancellables.forEach { $0.cancel() }
     cancellables.removeAll()
+  }
+  
+  func didTapAddPaymentMethod() {///finance home 리블렛에서 화면을 띄워주는게 명확해 보인다.
+    listener?.cardOnFileDashboardDidTapAddPaymentMethod()
   }
 }
