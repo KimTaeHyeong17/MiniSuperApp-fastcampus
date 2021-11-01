@@ -61,7 +61,7 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
     self.navigationControllable = navigation
     viewController.present(navigation, animated: true, completion: nil)
   }
-   //
+
   private func dismissPresentedNavigation(completion: (() -> Void)?) {
     if self.navigationControllable == nil {
       return
