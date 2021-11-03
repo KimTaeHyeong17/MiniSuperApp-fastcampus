@@ -34,7 +34,7 @@ final class CardOnFileViewController: UIViewController, CardOnFilePresentable, C
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.register(cellType: CardOnFileCell.self)
+    tableView.register(CardOnFileCell.self, forCellReuseIdentifier: "CardOnFileCell")
     tableView.tableFooterView = UIView()
     tableView.rowHeight = 60
     tableView.separatorInset = .zero
@@ -45,9 +45,8 @@ final class CardOnFileViewController: UIViewController, CardOnFilePresentable, C
     title = "카드 선택"
     view.backgroundColor = .white
     view.addSubview(tableView)
-    
+  
     setupNavigationItem(with: .back, target: self, action: #selector(didTapClose))
-    
     NSLayoutConstraint.activate([
       tableView.topAnchor.constraint(equalTo: view.topAnchor),
       tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -62,9 +61,10 @@ final class CardOnFileViewController: UIViewController, CardOnFilePresentable, C
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell: CardOnFileCell = tableView.dequeueReusableCell(for: indexPath)
+    let cell: CardOnFileCell = tableView.dequeueReusableCell(withIdentifier: "CardOnFileCell", for: indexPath) as! CardOnFileCell
 
-    if let viewModel = viewModels[safe: indexPath.row] {
+    if indexPath.row < viewModels.count {
+      let viewModel = viewModels[indexPath.row]
       cell.setImage(UIImage(color: viewModel.color))
       cell.setTitle("\(viewModel.name) \(viewModel.digits)")
     } else {
@@ -77,7 +77,6 @@ final class CardOnFileViewController: UIViewController, CardOnFilePresentable, C
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
     listener?.didSelectItem(at: indexPath.row)
   }
   
