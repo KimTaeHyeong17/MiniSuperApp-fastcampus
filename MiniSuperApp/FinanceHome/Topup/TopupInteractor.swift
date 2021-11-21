@@ -16,6 +16,7 @@ protocol TopupRouting: Routing {
   func detachEnterAmount()
   func attachCardOnFile(paymentMethods: [PaymentMethod])
   func detachCardOnFile()
+  func popToRoot()
 }
 
 protocol TopupListener: AnyObject {
@@ -35,6 +36,8 @@ final class TopupInteractor: Interactor, TopupInteractable, AddPaymentMethodList
   
   let presentationDelegateProxy: AdaptivePresentationControllerDelegateProxy
   
+  private var isEnterAmountRoot: Bool = false
+  
   private var paymentMehtods: [PaymentMethod] {
     dependency.cardOnFileRepository.cardOnFile.value
   }
@@ -52,9 +55,11 @@ final class TopupInteractor: Interactor, TopupInteractable, AddPaymentMethodList
     super.didBecomeActive()
     
     if let card = dependency.cardOnFileRepository.cardOnFile.value.first {
+      isEnterAmountRoot = true
       dependency.paymentMethodStream.send(card)
       router?.attachEnterAmount()
     } else {
+      isEnterAmountRoot = false
       router?.attachAddPaymentMethod()
     }
   }
@@ -75,7 +80,13 @@ final class TopupInteractor: Interactor, TopupInteractable, AddPaymentMethodList
   
   func addPaymentMethodDidAddCard(paymentMethod: PaymentMethod) {
     dependency.paymentMethodStream.send(paymentMethod)
-    router?.attachEnterAmount()
+    
+    if isEnterAmountRoot {
+      router?.popToRoot()
+    } else {
+      isEnterAmountRoot = true
+      router?.attachEnterAmount()
+    }
   }
   
   func enterAmountDidTapClose() {
@@ -96,7 +107,7 @@ final class TopupInteractor: Interactor, TopupInteractable, AddPaymentMethodList
   }
   
   func cardOnFileDidTapAddCard() {
-    
+    router?.attachAddPaymentMethod()
   }
   
   func cardOnFileDidSelect(at index: Int) {
