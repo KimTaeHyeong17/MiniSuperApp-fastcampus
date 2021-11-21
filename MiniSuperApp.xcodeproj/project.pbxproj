@@ -47,6 +47,7 @@
 		832CA70C2732D7F300A6EC24 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832CA70B2732D7F300A6EC24 /* UIImage+Utils.swift */; };
 		832CA70E2732DBD400A6EC24 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832CA70D2732DBD400A6EC24 /* Array+Utils.swift */; };
 		838BB4192726E10C00666267 /* notepad.md in Sources */ = {isa = PBXBuildFile; fileRef = 838BB4182726E10C00666267 /* notepad.md */; };
+		83E52ED5274A3EFA0012A39E /* SuperPayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E52ED4274A3EFA0012A39E /* SuperPayRepository.swift */; };
 		F57F6AE826DB4A2700C0117D /* FinanceHomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F6AE426DB4A2700C0117D /* FinanceHomeRouter.swift */; };
 		F57F6AE926DB4A2700C0117D /* FinanceHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F6AE526DB4A2700C0117D /* FinanceHomeViewController.swift */; };
 		F57F6AEA26DB4A2700C0117D /* FinanceHomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F6AE626DB4A2700C0117D /* FinanceHomeBuilder.swift */; };
@@ -123,6 +124,7 @@
 		832CA70B2732D7F300A6EC24 /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		832CA70D2732DBD400A6EC24 /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		838BB4182726E10C00666267 /* notepad.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = notepad.md; sourceTree = "<group>"; };
+		83E52ED4274A3EFA0012A39E /* SuperPayRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPayRepository.swift; sourceTree = "<group>"; };
 		F57F6AE426DB4A2700C0117D /* FinanceHomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceHomeRouter.swift; sourceTree = "<group>"; };
 		F57F6AE526DB4A2700C0117D /* FinanceHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceHomeViewController.swift; sourceTree = "<group>"; };
 		F57F6AE626DB4A2700C0117D /* FinanceHomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceHomeBuilder.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				83278384272703310044079F /* CardOnFileRepository.swift */,
+				83E52ED4274A3EFA0012A39E /* SuperPayRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				832CA6F4273039B200A6EC24 /* EnterAmountBuilder.swift in Sources */,
 				832CA6F5273039B200A6EC24 /* EnterAmountInteractor.swift in Sources */,
 				832CA7032732CFF800A6EC24 /* CardOnFileRouter.swift in Sources */,
+				83E52ED5274A3EFA0012A39E /* SuperPayRepository.swift in Sources */,
 				832CA6EB2730235E00A6EC24 /* TopupBuilder.swift in Sources */,
 				832783692726E6A70044079F /* SuperPayDashboardViewController.swift in Sources */,
 				83278385272703310044079F /* CardOnFileRepository.swift in Sources */,

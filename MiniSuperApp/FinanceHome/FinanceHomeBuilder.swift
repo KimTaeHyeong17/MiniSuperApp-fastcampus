@@ -12,18 +12,18 @@ final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDash
   ///리블렛이 필요한 객체를 담는 바구니
   ///자식리블렛이 필요한 객체도 담고 있어서 자식들의 dependency를 conform 해야함
   
-  var cardOnFileRepository: CardOnFileRepository
-  var balance: ReadOnlyCurrentValuePublisher<Double> { balancePublisher }
-  private let balancePublisher: CurrentValuePublisher<Double>
+  let cardOnFileRepository: CardOnFileRepository
+  let superPayRepository: SuperPayRepository
+  var balance: ReadOnlyCurrentValuePublisher<Double> { superPayRepository.balance }
 
   init(
     dependency: FinanceHomeDependency,
-    balance: CurrentValuePublisher<Double>,
     cardOnFileRepository: CardOnFileRepository,
+    superPayRepository: SuperPayRepository,
     topupBaseViewController: ViewControllable
   ) {
-    self.balancePublisher = balance
     self.cardOnFileRepository = cardOnFileRepository
+    self.superPayRepository = superPayRepository
     self.topupBaseViewController = topupBaseViewController
     super.init(dependency: dependency)
   }
@@ -49,8 +49,8 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
 
     let component = FinanceHomeComponent(
       dependency: dependency,
-      balance: balancePublisher,
       cardOnFileRepository: CardOnFileRepositoryImp(),
+      superPayRepository: SuperPayRepositoryImp(),
       topupBaseViewController: viewController
     )
     let interactor = FinanceHomeInteractor(presenter: viewController)
